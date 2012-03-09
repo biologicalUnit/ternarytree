@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * A Ternary Search Tree (http://en.wikipedia.org/wiki/Ternary_search_tree) to efficiently back a suggest / automcomplete.
  * User: torstenek, 10/19/11:20:09.
+ * MIT Licensed
  */
 public class TernaryTree {
     private Node root;
