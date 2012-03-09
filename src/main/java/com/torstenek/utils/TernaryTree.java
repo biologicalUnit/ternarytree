@@ -42,10 +42,11 @@ public class TernaryTree {
             throw new IllegalArgumentException("Don't add a null or empty string");
         }
         int pos = 0;
+        String sl = s.toLowerCase();
         if (root == null) {
-            root = new Node(s.charAt(0), false);
+            root = new Node(sl.charAt(0), false);
         }
-        add(s.toLowerCase(), s, pos, root);
+        add(sl, s, pos, root);
     }
 
     public boolean contains(String s) {
