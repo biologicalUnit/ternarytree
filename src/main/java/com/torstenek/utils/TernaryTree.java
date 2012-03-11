@@ -51,13 +51,21 @@ public class TernaryTree {
     }
 
     public boolean contains(String s) {
-        if (s == null || s.length() == 0) { throw new IllegalArgumentException(); }
+        if (s == null || s.length() == 0) {
+            throw new IllegalArgumentException();
+        }
         int pos = 0;
         Node node = root;
         while (node != null) {
             final char c = Character.toLowerCase(s.charAt(pos));
-            if (c < node.character) { node = node.left; } else if (c > node.character) { node = node.right; } else {
-                if (++pos == s.length()) { return node.wordEnd; }
+            if (c < node.character) {
+                node = node.left;
+            } else if (c > node.character) {
+                node = node.right;
+            } else {
+                if (++pos == s.length()) {
+                    return node.wordEnd;
+                }
                 node = node.middle;
             }
         }
@@ -65,12 +73,14 @@ public class TernaryTree {
     }
 
     public List<String> getCompletionsFor(String orig) {
+        List<String> completions = null;
         String s = orig.toLowerCase();
-        if (s == null || s.length() == 0) { throw new IllegalArgumentException(); }
+        if (s == null || s.length() == 0) {
+            throw new IllegalArgumentException();
+        }
         int pos = 0;
         Node node = root;
-        boolean foundMatch = false;
-        while (!foundMatch && node != null) {
+        while (node != null) {
             final char c = s.charAt(pos);
             if (c < node.character) {
                 node = node.left;
@@ -78,18 +88,17 @@ public class TernaryTree {
                 node = node.right;
             } else {
                 if (++pos == s.length()) {
-                    foundMatch = true;
+                    if (!node.wordEnd) {
+                        node = node.middle;
+                    }
+                    completions = new ArrayList<String>();
+                    collectCompletions(node, completions);
+                    return completions;
                 }
                 node = node.middle;
             }
         }
-        if (node != null) {
-            List<String> completions = new ArrayList<String>();
-            collectCompletions(node, completions);
-            return completions;
-        } else {
-            return null;
-        }
+        return completions;
     }
 
     private void collectCompletions(Node node, List<String> completions) {

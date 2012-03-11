@@ -30,7 +30,7 @@ public class TernaryTreeTest {
             completions = tree.getCompletionsFor("A");
             Assert.assertTrue(completions.size() == 3);
             completions = tree.getCompletionsFor("AB");
-            Assert.assertTrue(completions.size() == 2);
+            Assert.assertTrue(completions.size() == 3);
 
             completions = tree.getCompletionsFor("B");
             Assert.assertTrue(completions.size() == 1);
